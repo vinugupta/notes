@@ -27,3 +27,6 @@
  -  503  when no server was available to handle the request, or in response to
         monitoring requests which match the "monitor fail" condition
  -  504  when the response timeout strikes before the server responds
+
+
+![alt text](https://fthmb.tqn.com/SD6sPfGnD0pdGHaPnTbBEb1rQpA=/400x400/Osi-model-jb.svg-57f7b9af3df78c690f6305e8.png)
