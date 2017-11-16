@@ -1,9 +1,9 @@
 # notes
 
 ### HTTP response
-   1     HTTP/1.1 200 OK
-   2    Content-length: 350
-   3     Content-Type: text/html
+ -  1     HTTP/1.1 200 OK
+ -  2    Content-length: 350
+ -  3     Content-Type: text/html
  - 1xx = informational message to be skipped (eg: 100, 101)
  - 2xx = OK, content is following   (eg: 200, 206)
  - 3xx = OK, no content following   (eg: 302, 304)
@@ -29,4 +29,4 @@
  -  504  when the response timeout strikes before the server responds
 
 
-![alt text](https://fthmb.tqn.com/SD6sPfGnD0pdGHaPnTbBEb1rQpA=/400x400/Osi-model-jb.svg-57f7b9af3df78c690f6305e8.png)
+![alt text](https://alln-extcloud-storage.cisco.com/ciscoblogs/osi-550x425.gif)
