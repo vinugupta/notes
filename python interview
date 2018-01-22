@@ -1,0 +1,297 @@
+Python interview question
+
+https://www.codementor.io/sheena/essential-python-interview-questions-du107ozr6
+1)def print_directory_contents(sPath): """ This function takes the name of a directory and prints out the paths files within that directory as well as any files contained in contained directories. This function is similar to os.walk. Please don't use os.walk in your answer. We are interested in your ability to work with nested structures. ""” fill_this_in
+
+def print_directory_contents(sPath): 
+import os 
+for sChild in os.listdir(sPath): 
+ sChildPath = os.path.join(sPath,sChild) 
+if os.path.isdir(sChildPath): 
+ print_directory_contents(sChildPath)
+else: 
+ print(sChildPath)
+
+find $PWD  to get absolutely path in linux
+
+A0 = dict(zip(('a','b','c','d','e'),(1,2,3,4,5)))
+A1 = range(10)
+A2 = sorted([i for i in A1 if i in A0])
+A3 = sorted([A0[s] for s in A0])
+A4 = [i for i in A1 if i in A3]
+A5 = {i:i*i for i in A1}
+A6 = [[i,i*i] for i in A1]
+  
+{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+range(0, 10)
+[]
+[1, 2, 3, 4, 5]
+[1, 2, 3, 4, 5]
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81}
+[[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]]
+
+		
+ def f(x,l=[]): for i in range(x): l.append(i*i) print(l) f(2) f(3,[3,2,1]) f(3)
+for k in dict:           —for key in dictionary
+	    print(k)
+Monkey patching 
+Mock testing 
+
+Decorators:
+https://www.geeksforgeeks.org/class-method-vs-static-method-python/
+What do these mean to you: @classmethod, @staticmethod, @property?
+  python doesn’t support method overloading like C++ or Java so we use class methods to create factory methods
+We generally use class method to create factory methods. Factory methods return class object ( similar to a constructor ) for different use cases.
+We generally use static methods to create utility functions.
+A class method takes cls as first parameter while a static method needs no specific parameters.
+A class method can access or modify class state while a static method can’t access or modify it.
+
+# Python program to demonstrate
+# use of class method and static method.
+from datetime import date
+ 
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+     
+    # a class method to create a Person object by birth year.
+    @classmethod
+    def fromBirthYear(cls, name, year):
+        return cls(name, date.today().year - year)
+     
+    # a static method to check if a Person is adult or not.
+    @staticmethod
+    def isAdult(age):
+        return age > 18
+ 
+person1 = Person('mayank', 21)
+person2 = Person.fromBirthYear('mayank', 1996)
+ 
+print person1.age
+print person2.age
+ 
+# print the result
+print Person.isAdult(22)
+
+
+
+setter and getter
+class P:
+
+    def __init__(self,x):
+        self.set_x(x)
+
+    def get_x(self):
+        return self.__x
+
+    def set_x(self, x):
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+
+https://www.python-course.eu/python3_properties.php
+class P:
+
+    def __init__(self,x):
+        self.x = x
+
+    @property
+    def x(self):
+        return self.__x
+
+    @x.setter
+    def x(self, x):
+        if x < 0:
+            self.__x = 0
+        elif x > 1000:
+            self.__x = 1000
+        else:
+            self.__x = x
+p1 = P(1001)
+print()
+Testing
+Q12. What is monkey patching in Python?
+
+Ans: In Python, the term monkey patch only refers to dynamic modifications of a class or module at run-time.
+
+Consider the below example:
+
+1
+2
+3
+4
+# m.py
+class MyClass:
+def f(self):
+print "f()"
+We can then run the monkey-patch testing like this:
+
+1
+2
+3
+4
+5
+6
+7
+import m
+def monkey_f(self):
+print "monkey_f()"
+ 
+m.MyClass.f = monkey_f
+obj = m.MyClass()
+obj.f()
+The output will be as below:
+
+monkey_f()
+Mocking in Python
+
+https://semaphoreci.com/community/tutorials/getting-started-with-mocking-in-python
+
+5. Explain how Python does Compile-time and Run-time code checking?
+https://intellipaat.com/interview-question/python-interview-questions/
+
+16. Explain all the file processing modes supported by Python ?
+Python allows you to open files in one of the three modes. They are:
+read-only mode, write-only mode, read-write mode, and append mode by specifying the flags “r”, “w”, “rw”, “a” respectively.
+A text file can be opened in any one of the above said modes by specifying the option “t” along with
+“r”, “w”, “rw”, and “a”, so that the preceding modes become “rt”, “wt”, “rwt”, and “at”.A binary file can be opened in any one of the above said modes by specifying the option “b” along with “r”, “w”, “rw”, and “a” so that the preceding modes become “rb”, “wb”, “rwb”, “ab”.
+
+
+
+ What is the use of enumerate() in Python?
+Using enumerate() function you can iterate through the sequence and retrieve the index position and its corresponding value at the same time.
+>>> for i,v in enumerate([‘Python’,’Java’,’C++’]):
+print(i,v)
+0 Python
+1 Java
+2 C++
+
+JSON to Python
+
+Reading JSON means converting JSON into a Python value (object). As mentioned above, the json library parses JSON into a dictionary or list in Python. In order to do that, we use the loads() function (load from a string), as follows:
+
+1
+2
+3
+import json
+jsonData = '{"name": "Frank", "age": 39}'
+jsonToPython = json.loads(jsonData)
+
+Python to JSON
+
+In the previous section, we saw how to convert JSON into a Python value (i.e. Dictionary). In this section, I will show you how we can convert (encode) a Python value to JSON.
+
+import json
+
+pythonDictionary = {'name':'Bob', 'age':44, 'isEmployed':True}
+dictionaryToJson = json.dumps(pythonDictionary)
+print(dictionaryToJson)
+
+jsonData = '{"name": "Frank", "age": 39}'
+jsonToPython = json.loads(jsonData)
+print(jsonToPython)
+
+class Employee(object):
+def __init__(self, name):
+self.name = name
+
+class User(object):
+def __init__(self, name, password):
+self.name = name
+self.password = password
+
+alice = User('Alice A. Adams', 'secret')
+
+vinay = Employee("vinay")
+
+def jsonDefault(object):
+if isinstance(object,list):
+return list(object)
+return object.__dict__
+
+pets = [u'Tiger', u'Panther', u'Toad']
+jsonAbder = json.dumps(pets,default=jsonDefault)
+print(jsonAbder)
+jsonAbder = json.dumps(alice,default=jsonDefault). — only on ekind of object
+# jsonAbder = json.dumps({"abder":"aa"})
+print (jsonAbder)
+ To remove dublication from list
+>>> t = [1,2,3,1,2,3,4,7,8]
+>>> print (set(t))
+{1, 2, 3, 4, 7, 8}
+>>> print (list(set(t)))
+t = [1, 2, 3, 1, 2, 5, 6, 7, 8]
+s = []
+for i in t:
+    if i not in s:
+        s.append(i)
+print(s)
+Functional/expression oriented programming
+
+>>> items = [1, 2, 3, 4, 5]
+>>> 
+>>> def sqr(x): return x ** 2
+
+>>> list(map(sqr, items))
+[1, 4, 9, 16, 25]		
+list(map((lambda x: x **2), items))
+[1, 4, 9, 16, 25]
+def square(x):
+    return (x ** 2)
+
+
+def cube(x):
+    return (x ** 3)
+
+
+funcs = [square, cube]
+for r in range(5):
+    value = map((lambda x: x(r)), funcs)
+    print value					>>> list(range(-5,5))
+
+[-5, -4, -3, -2, -1, 0, 1, 2, 3, 4]
+>>>
+>>> list( filter((lambda x: x < 0), range(-5,5)))
+[-5, -4, -3, -2, -1]
+>>> 
+finding intersection of two lists
+a = [1,2,3,5,7,9]
+b = [2,3,5,6,7,8]
+print (list(filter(lambda x: x in a,b))) or
+print ([x for x in a if x in b])
+Reduce is in the functools in Python 3.0. It is more complex. It accepts an iterator to process, but it's not an iterator itself. It returns a single result:
+from functools import reduce
+
+reduce( (lambda x, y: x * y), [1, 2, 3] )
+
+concatenate a list of strings to make a sentence
+import functools
+>>> L = ['Testing ', 'shows ', 'the ', 'presence', ', ','not ', 'the ', 'absence ', 'of ', 'bugs']
+>>> functools.reduce( (lambda x,y:x+y), L)
+'Testing shows the presence, not the absence of bugs'
+>>> 
+ How is Multithreading achieved in Python?
+
+Ans: 
+
+Python has a multi-threading package but if you want to multi-thread to speed your code up.
+Python has a construct called the Global Interpreter Lock (GIL). The GIL makes sure that only one of your ‘threads’ can execute at any one time. A thread acquires the GIL, does a little work, then passes the GIL onto the next thread.
+This happens very quickly so to the human eye it may seem like your threads are executing in parallel, but they are really just taking turns using the same CPU core.
+All this GIL passing adds overhead to execution. This means that if you want to make your code run faster then using the threading package often isn’t a good idea.
+
+
+Pickle
+import pickle
+
+a = ['test value', 'test value 2', 'test value 3']
+file_Name = "testfile"
+fileObject = open(file_Name, 'wb')
+pickle.dump(a, fileObject)
+fileObject.close()
+fileObject = open(file_Name, 'r')
+b = pickle.load(fileObject)
+print(a)
