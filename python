@@ -1,0 +1,155 @@
+python 
+
+https://www.programiz.com/article/difference-compiler-interpreter
+
+python3
+import os
+os.__doc__
+dir(). —get attributes 
+dir(os)
+
+os.getcwd()
+os.getcwd.__doc__
+os.method_name. tab for auto complete in pyhton 3
+os.environ.get('PWD’)
+os.environ['PWD']
+os.listdir(sPath)
+os.path.join(sPath,sChild) 
+os.path.isdir(sChildPath): 
+dir(os.__builtins__).    — to get builtin functions like len 
+
+
+
+import os
+cmd=‘ls -al’
+os.system(cmd).  —execute command in subshell
+os.system(‘ls')
+help(str)
+help(). 
+str
+
+ debuger 
+pudb
+
+with open (file_path, ‘r’) as f:   ---to read file
+data = yaml.load(f)
+
+a = [i for i in range(10)]       a=[0,1…,8,9]
+
+inv_tier = ‘{0}-{1}’.format(’name’,’tier’)   inv_tier= name-tier
+
+return json.dumps(obj=result, sort_keys=True, indent=4, separators=(',', ': ‘))
+
+——
+from argparse import ArgumentParser ---Object for parsing command line strings into Python objects.
+dir(ArgumentParser())
+if __name__ == '__main__':
+    parser = ArgumentParser(description='Ansible inventory script')
+        parser.add_argument('--sshkey', default=‘hihi',help='Path to an alternative SSH private key', type=str)
+        parser.add_argument('--commit', help='Commit to checkout (e.g. branch or tag)', type=str)
+        parser.add_argument('url', help='URL of the git repository', type=str)  — url is compulsory string 
+        parser.add_argument('inventory', help='Path of the inventory file', type=str)
+        args = parser.parse_args()
+
+ parse_args(self, args=None, namespace=None)
+ |      # =====================================
+ |      # Command line argument parsing methods
+ |      # =====================================
+
+        kwargs_clone = {
+            'url': args.url,
+            'sshkey': args.sshkey,
+            'commit': args.commit,
+        }
+
+——
+from subprocess import check_call
+check_call ([“ls”,”-l”]). —usefull for git clone
+
+id(object)
+Return the “identity” of an object. This is an integer (or long integer) which is guaranteed to be unique and constant for this object during its lifetime. Two objects with non-overlapping lifetimes may have the same id() value.
+
+
+URL.    
+p2:  import urllib, json
+url = "http://maps.googleapis.com/maps/api/geocode/json?address=google"
+response = urllib.urlopen(url)
+data = json.loads(response.read())
+print data
+OR
+ import requests
+ar = requests.get("http://maps.googleapis.com/maps/api/geocode/json?address=google")
+print ar.json() 
+>>> print ar.status_code
+200
+>>> ar.headers
+dir(ar) 
+['__attrs__', '__bool__', '__class__', '__delattr__', '__dict__', '__doc__', '__enter__', '__exit__', '__format__', '__getattribute__', '__getstate__', '__hash__', '__init__', '__iter__', '__module__', '__new__', '__nonzero__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setstate__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_content', '_content_consumed', '_next', 'apparent_encoding', 'close', 'connection', 'content', 'cookies', 'elapsed', 'encoding', 'headers', 'history', 'is_permanent_redirect', 'is_redirect', 'iter_content', 'iter_lines', 'json', 'links', 'next', 'ok', 'raise_for_status', 'raw', 'reason', 'request', 'status_code', 'text', 'url']
+
+
+>>> r = requests.post("http://httpbin.org/post")
+
+You can also use other HTTP request types, like PUT, DELETE, HEAD and OPTIONS
+
+>>> r = requests.put("http://httpbin.org/put")
+
+>>> r = requests.delete("http://httpbin.org/delete")
+
+>>> r = requests.head("http://httpbin.org/get")
+
+>>> r = requests.options("http://httpbin.org/get")
+
+r = requests.get('https://api.github.com/user', auth=('user', 'pass'))
+
+
+
+p3: import urllib.request, json 
+with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+
+from tempfile import mkdtemp
+a=mkdtemp()
+
+
+from shutil import rmtree
+rmtree(/path/)
+
+
+functions are first-class objects. This means that functions can be passed around, and used as arguments, just like any other value (e.g, string, int, float).
+
+Decorator
+decorator is a special kind of function that either takes a function and returns a function
+
+def my_decorator(some_function):
+
+    def wrapper():
+
+        print("Something is happening before some_function() is called.")
+
+        some_function()
+
+        print("Something is happening after some_function() is called.")
+
+    return wrapper
+
+@my_decorator
+def just_some_function():
+    print("Wheee!”)
+
+just_some_function()
+
+# just_some_function = my_decorator(just_some_function)  #equivalent to above line
+# just_some_function()
+
+set up a virtual environment:
+
+python3 -m venv mocking
+Activate the virtual environment by running:
+
+source mocking/bin/activate
+   to represent object
+def __repr__(self):
+        return '<Blog: {}>'.format(self.name)
+
+
