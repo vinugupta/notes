@@ -1,0 +1,91 @@
+SSH agent 
+
+## SSH Agent
+#### Description: SSH Agent Keeps your private keys in the memory during session. All application thats need an SSH connection will refer to the agent to get your private key, So only have to type your passphrase once at the beginning of your session.
+#### Requirement: Passphrase less login using private key
+
+### Step 1: Start ssh-agent
+#### Check shh-agent running status
+    ps x | grep ssh-agent
+#### To run ssh-agent
+    eval $(ssh-agent)
+
+### Step 2: Add ssh private key to ssh-agent
+#### To add ssh key to ssh-agent
+    ssh-add path_of_ur_private_key
+
+    ssh-add -K path_of_ur_private_key   -- ask key passphrase and add ssh key with passphrase
+
+#### List all keys available in ssh-agent
+    ssh-add -l
+#### Delete all ssh keys added to ssh-agent
+    ssh-add -D
+#### Delete ssh key added to ssh-agent
+    ssh-add -d path_of_ur_private_key   // not working with vagrant private key
+
+#### Example: Cloning the git repo which have ssh public key configure in it. This ssh key is passphrase protected. So whenever I try to clone this repo, ssh agent will ask for passphrase. For passphrase less cloning follow the below step
+    ssh-add -K ~/.ssh/id_rsa
+
+
+## SFTP
+#### Requirement: I want to access files stored on my server without installing anything extra.
+    sftp remote_username@remote_host
+
+
+## Tunneling via Local Port Forwarding
+
+#### Requirement: I want to do things that aren't allowed on my computer but I know a machine from where they are allowed
+### Server side config
+#### vi /etc/ssh/sshd_config
+    AllowTcpForwarding yes
+#### Reload ssh service
+    systemctl restart sshd
+
+### Client side
+#### Shh login with tunneling
+    ssh -L client_port:server_host_name:server_port remote_username@remote_host
+##### Example: Server running tomcat at localhost:8080 and want to tunnel server port 8080 to client port 9080
+    ssh -L 9080:localhost:8080 remote_username@remote_host
+
+## X11 Forwarding
+
+#### Requirement: There is some really expensive software on the server that I don't have a license for. I could just connect to the server and display the software on my home screen ussing X11 forwarding tool.
+
+### Server side config
+#### vi /etc/ssh/sshd_config
+    X11Forwarding yes
+
+#### Reload ssh service
+    systemctl restart sshd
+
+#### Install xauth and xclock packages
+    sudo yum -y install xauth xclock
+
+### Client side
+
+#### Install xquartz
+    brew cask install xquartz
+
+#### Open xinit instance
+     xinit
+
+#### Shh login with enables X11 forwarding
+    ssh -X remote_username@remote_host
+
+#### Shh login with enables trusted X11 forwarding
+    ssh -Y remote_username@remote_host
+
+#### Example: To access the UI of xclock  in the client machine (mac) which is installed in the server machine (oracle7).
+
+    vagrant init generic/oracle7     -- initial vagrant file with oracle7
+    vagrant up
+    vagrant ssh
+    sudo vi /etc/ssh/sshd_config     -- make  'X11Forwarding yes'
+    sudo systemctl restart sshd      -- if X11Forwarding flag is already set to yes then no need to restart sshd
+    sudo yum -y install xauth xclock -- install xauth and xclock packages
+    exit                             -- terminate ssh connection
+    brew cask install xquartz        --  install xquartz packages in client machine
+    xinit                            -- open xinit instance
+    ssh-add path_of_ur_vagrant_identityFile  -- can find using vagrant ssh-config
+    ssh -X vagrant@127.0.0.1 -p 2200 -- check ur vagrant port using vagrant ssh-config
+    xclock                           -- will open xclock UI in client machine
