@@ -1,0 +1,33 @@
+Splunk
+Its a log analyzing and monitoring tool which communicate with different log files. kind of searching mechanism  in log
+
+Universal forwarder: splunk universal forwarder component needs to be install in all the systems . provide ip of next level of component  (heavy forwarder) where u need to forward logs. can forward multiple ip.  
+
+UF …UF -> Load Balancer -> HF…HF-> LoadB -> indexer..indexer (licence manager on size of data can indexed) 
+
+srever already have lots of load to avoid to put extra load we use HF
+splunk mysql aap to collect sql log. 
+
+UF= universal forwarder (light w8 component.server already have lots of load)
+HF= heavy forwarder (for filtering like u want just error log using some filter algo. like regex)
+
+splunk indexer: filter on the bases of specific indexer (field, column, timestamp). supports user defined indexing like base on host name, source
+
+splunk enterpriser(heavy w8  component ):
+  — plunk HF
+  — splunk indexer
+  — splunk serach head
+  — splunk deployment server
+  — generate reports
+  — generate dashboard
+  — gui 
+   — apps
+—  except UF and dedicated  apps  
+ 
+
+search pull the data from the indexer
+UF and HF push the data in the indexer
+
+deployment sever: deploy app in all HF
+
+DATA splunk fetch :csv data, sql data , weservuce , apache, json xml ,
