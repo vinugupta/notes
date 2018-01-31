@@ -8,3 +8,99 @@ $ docker run -d \
     --cpuset-cpus=0 \
     --cpu-shares=80 \
     busybox md5sum /dev/urandom
+Docker
+
+ run         Run a command in a new container
+exec        Run a command in a running container
+
+
+docker login artl-iag.apple.com
+cat ~/.docker/config.json
+docker push artl-iag.apple.com/vg/alpine-java8-mave
+
+
+docker tag 3fd9065eaf02 artl-iag.apple.com/vg/alpine-java8-maven
+
+COPY
+COPY instruction copies new files or directories from <src> and adds them to the filesystem of the container at the path <dest>.
+ADD
+ADD instruction copies new files, directories or remote file URLs from <src> and adds them to the filesystem of the image at the path 
+
+docker version
+docker login artl-iag.apple.com
+docker login artifactory-iag.apple.com
+docker login retail-bint.corp.apple.com
+
+cat ~/.docker/config.json
+
+docker exec -it e2233b476507 ls -al /
+
+docker container-id/name 8da4da56a5ea alpine_date
+
+
+Docker volume
+docker volume create --name=m2repo2
+docker volume inspect m2repo2
+docker volume rm m2repo3 m2repo4
+docker volume ls
+docker cp /Users/vinaykumar.gupta/m2_manual/ m2repo2:/tmp/
+docker pull retail-bint.corp.apple.com/alpine-java8-maven:3.5
+docker push artifactory-iag.apple.com:5002/vg/oraclelinux
+docker tag retail-bint.corp.apple.com/alpine-java8-maven:3.5 artl-iag.apple.com/vg/alpine-java8-maven
+docker push artl-iag.apple.com/vg/alpine-java8-maven
+
+docker diff
+docker exec -it e2233b476507 touch a /
+docker diff container-id
+Inspect changes to files or directories on a container's filesystem
+
+login in running docker conatiner
+docker ps — check for command
+docker exec -it 047494c77f27 /bin/sh
+
+Docker Swarm
+
+
+
+Docker Machine is a tool that lets you install Docker Engine on virtual hosts, and manage the hosts with docker-machine commands
+docker-machine create -d virtualbox manager-1
+docker-machine create -d virtualbox worker-1
+docker-machine create -d virtualbox worker-2
+docker-machine ip manager-1   — to get ip of machine
+eval(docker-machine env manager-1)
+docker-machine ls —filter=driver=virtualbox
+docker swarm init --advertise-addr $(docker-machine ip manager-1)
+Add worker to swarm
+eval $(docker-machine env worker-1)
+docker swarm join \
+    --token SWMTKN-1-0dzdhkkye2l2e7c7z0ggkjxdcpk7w9ny0eepmcc8s5foc6a01k-6dwq5cwgffrzs4f0in6vflqig \
+    10.10.1.41:2377
+eval $(docker-machine env worker-2)
+--token SWMTKN-1-0dzdhkkye2l2e7c7z0ggkjxdcpk7w9ny0eepmcc8s5foc6a01k-6dwq5cwgffrzs4f0in6vflqig \
+    10.10.1.41:2377
+eval $(docker-machine env manager-1)
+docker node ls
+docker info
+ eval $(docker-machine env -u).  - to unset 
+
+docker-machine ssh worker-9
+
+
+ docker-machine --native-ssh  --debug create  -d generic --generic-ssh-user vagrant  --generic-ssh-key /Users/vinaykumar.gupta/workspace/sample-ansible/.vagrant/machines/default/virtualbox/private_key --generic-ip-address 127.0.0.1 --generic-ssh-port 2200 worker-9
+
+
+Docker secret
+docker secret create my_secret filename
+
+
+USe in docker swarm manager node
+echo “hihi” | docker secret create my_secret -
+docker secret ls
+docker secret inspect my_secret
+docker secret create --label env=dev --label rev=33222 my_secret_3  :with label
+
+ansible -i "localhost," -m setup all -c “local"
+ansible -i "10.0.15.45,localhost" -m ping 10.0.15.45 -c local
+
+
+
