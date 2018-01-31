@@ -1,0 +1,122 @@
+LINX
+
+hashbang/sha-band/pound-band/hash-pling (#!/)
+#!/usr/bin/env bash   * env prog do path search 
+or #!/bin/bash
+#!/usr/bin/env python
+
+brew info nginx
+
+firewall-cmd —permanent —add-port=80/tcp
+firewall-cmd --reload
+
+ip addr.  — get ip address in centos box
+
+ uname -- Print operating system name 
+uname -r
+uname -a
+‘
+  dmesg -- display the system message buffer
+
+
+
+lsof -i :8081
+A sysytem wide configuration file is there in etc
+cat /etc/ansible/ansible.cfg
+cat /etc/ssh/sshd_config
+
+ps -x | grep ssh-agent
+
+a="ls -a”
+eval $a
+
+find -name file.txt. —check in subdirectory also
+find file.txt    —check in same directory
+
+df   disk free space
+df  -h | awk '{print $5}' | tr "\n" ":" | cut -f2 -d":" | cut -c1-2
+
+uptime  —hw long server is running
+uptime | cut -f3 -d "," | cut -c2.  —load on server
+
+ls -l  o/p
+mode link owner_name group_name no_of_bytes month day_modified
+
+$?  exit status of previous process
+$! background process
+netstat
+lsof -i :8080
+
+uname -u // print operating system name
+lsb_release -a.   — to het os information ,,not in mac
+
+./a.sh: sub process
+bash ./a.sh: sub process
+bash a.sh : sub
+source ./a.sh: same     work in both bash and cshell
+. ./a.sh: same process.   work only in bash shell. 
+sub process---
+fork(): creates a new process by duplicating the calling process.On success, the PID of the child process is returned in the parent, and 0 is returned in the child. On failure, -1 is returned in theparent, no child process is created.
+exec(): replaces the current process image with a new process image. return only if an error has occured
+https://bash.cyberciti.biz/guide/What_is_a_Process%3F
+
+
+
+
+ A program is a set of machine code instructions and data stored in an executable image on disk and is, as such, a passive entity; a process can be thought of as a computer program in action.
+
+ each process is represented by a task_struct data structure (task and process are terms that Linux uses interchangeably).The task vector is an array of pointers to every task_struct data structure in the system.
+
+State
+As a process executes it changes state according to its circumstances. Linux processes have the following states: 1
+Running
+The process is either running (it is the current process in the system) or it is ready to run (it is waiting to be assigned to one of the system's CPUs).
+Waiting
+The process is waiting for an event or for a resource. Linux differentiates between two types of waiting process; interruptible and uninterruptible. Interruptible waiting processes can be interrupted by signals whereas uninterruptible waiting processes are waiting directly on hardware conditions and cannot be interrupted under any circumstances.
+Stopped
+The process has been stopped, usually by receiving a signal. A process that is being debugged can be in a stopped state.
+Zombie
+This is a halted process which, for some reason, still has a task_struct data structure in the task vector. It is what it sounds like, a dead process.
+fork is for processes and clone is for threads. Clone use the share memory space of process.
+ One process can have multiple thread. 
+
+Identifiers: these are used to control this processes access to the files and devices in the system,
+
+ New processes are not created, they are copied, or rather cloned from previous processes. Every task_struct representing a process keeps pointers to its parent process and to its siblings (those processes with the same parent process) as well as to its own child processes
+
+
+
+SYSTEMCTL to control system demon 
+sudo systemctl status tomcat
+sudo systemctl start tomcat
+wget http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.0.47/bin/apache-tomcat-8.0.47.tar.gz
+tar -xf apache-tomcat-8.0.47.tar.gz
+
+vi conf/server.xml >>8080
+ps -ef | grep apache
+
+Nohup: Run a Command or Shell-Script Even after first commd get fail
+
+ The nohup utility invokes utility with its arguments and at this time sets the signal SIGHUP to be ignored
+
+xxx.sh
+nohup swwdd &
+ls
+the standard output is appended to the file nohup.out in the current directory
+
+Crontab: Schedule Tasks on Linux Using 
+
+crontab -l.  —-to list cron job
+crontab -e.  —to edit cron job
+
+finger -- user information lookup program.The finger utility displays information about the system users.
+
+
+Source command
+The source command can be used to load any functions file into the current shell script or a command prompt.
+hello.sh > a=‘hihi'  echo $a
+source hello.sh
+echo $a. — hihi
+source filename [arguments]
+source functions.sh
+source /path/to/functions.sh arg1 arg2
