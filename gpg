@@ -1,0 +1,37 @@
+GPG 
+
+brew install gpg
+
+
+
+gpg --gen-key
+
+
+
+gpg --list-secret-keys --keyid-format LONG
+
+
+
+git config --global commit.gpgsign true 
+
+
+
+git config --global user.signingkey 79BE6D3CC1D53A02
+
+
+
+gpg --armor --export 79BE6D3CC1D53A02
+
+ gpg --output gpg_key_private --armor --export-secret-keys D051E6281B9F3630. ## private key
+
+gpg --output gpg_key_public --armor --export D051E6281B9F3630. ## public key
+
+
+
+
+
+brew install pinentry-mac
+
+
+
+echo "pinentry-program /usr/local/bin/pinentry-mac" >> ~/.gnupg/gpg-agent.conf 
