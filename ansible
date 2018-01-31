@@ -1,0 +1,175 @@
+Ansible
+
+ ansible -m ping all -i "10.0.15.45,”
+
+ansible -m ping all --inventory ../ansible-git-inventory/inventory.py
+ansible-playbook -i "localhost," -c "local" aa.yml
+ansible-playbook -i 'host[1:10],' -m ping
+
+add-goc command
+
+ ansible -i "localhost," -m ping all -c local
+ ansible -i "localhost," -m setup all -c local
+ansible -i "inventory," -m git all -a "repo=https://github.com/confirm/ansible-git-inventory.git dest=ansible3" -c local
+ansible -i "inventory," -m copy -a"src=inventory.py dest=../" all -c local
+ansible -i "inventory," -m file -a "dest=e mode=600" all -c local.   — to change file permission
+
+
+list of ansible variable
+ansible  -m setup all
+
+What are Ansible server requirements?
+If you are a windows user then you need to have a virtual machine in which Linux should be installed.
+It requires Python 2.6 version and higher.
+
+with_items
+- name: install scm tools and ansible pre-requisites
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - subversion
+    - git
+    - python-setuptools
+
+
+
+GIT
+- name: clone ansible devel repo
+  become_user: vagrant
+  git:
+    repo: git://github.com/ansible/ansible.git
+    dest: ansible
+    recursive: yes
+    update: yes
+- git:
+    repo: ssh://git@github.com/mylogin/hello.git
+    dest: /home/mylogin/hello
+---
+- hosts: all
+  connection: local
+  become_user: none
+  become_method: none
+  tasks:
+    - name: git clone
+      git: 
+        repo: https://github.com/confirm/ansible-git-inventory.git
+        dest: ansible
+
+ansible add-hoc  for git clone
+ansible -i "inventory," -m git all -a "repo=https://github.com/confirm/ansible-git-inventory.git dest=ansible3" -c local
+
+
+
+- hosts: github
+  connection: local
+  roles:
+a
+b
+
+---
+- hosts: all
+  become: no
+  gather_facts: yes
+  roles:
+    - { role: add_host }
+
+
+- name: create pull request
+  uri:
+    url: https://github.pie.apple.com/api/v3/repos/{{organization}}/{{repository}}/pulls
+    method: POST
+    body: '{{ create_pullrequest }}'
+    user: '{{ username }}'
+    password: '{{ password }}'
+    force_basic_auth: yes
+    status_code: 201
+    body_format: json
+  tags: create_pull_request
+
+
+
+---
+# Initialize an OS.
+# 1) Install some small packages
+# 2) INstall apache
+# 3) Create new website
+# 4) Start Apache.
+
+- hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+  tasks:
+  # - name: Update the OS
+  #   yum:
+  #     name: '*'
+  #     state: latest
+  - name: Install some packages
+    yum:
+      name: "{{ item }}"
+      state: installed
+    with_items:
+      - xz-devel
+      - tree
+      - dos2unix
+    notify: Everything installed
+
+  - name: Install apache Web Server
+    yum:
+      name: httpd
+      state: installed
+  - name: Create website
+    copy:
+      src: files/index.html
+      dest: /var/www/html/index.html
+  - name: Start the webserver
+    systemd:
+      name: httpd.service
+      state: started
+    notify: Apache installed
+
+  handlers:
+  - name: Everything installed
+    debug:
+      msg: "Stuff has been installed and updated"
+  - name: Apache installed
+    debug:
+      msg: "Website hads been setup"
+
+
+
+- hosts: apacheweb
+  user: vagrant
+  connection: ssh
+  become: yes
+  # become: yes
+   become_method: sudo
+  gather_fact
+
+———
+ansibel vagrant ssh
+
+ansible.cfg
+[defaults]
+remote_user = vagrant
+remote_port = 2201
+inventory = ./inventory
+private_key_file = /Users/vinaykumar.gupta/temp/ansible/.vagrant/machines/default/virtualbox/private_key
+
+inventory 
+[all]
+127.0.0.1
+
+git.yml 
+---
+- hosts: all
+  tasks:
+    - name: git clone
+      git:
+        repo: https://github.com/confirm/ansible-git-inventory.git
+        dest: git_test
+cmd
+ansible-playbook git.yml
+ansible-playbook -i inventory  git.yml    — if inventory wont be there in anible.cfg
+
