@@ -1,0 +1,55 @@
+Artifactory
+
+brew install artifactory
+brew install jenkins
+brew info artifactory 	-- check version
+/usr/local/Cellar/artifactory/5.5.0/bin/artifactory.sh start 	--to run instance
+open http://localhost:8081	--make sure artifactory instance running in port 8081
+/usr/local/Cellar/artifactory/5.5.0/bin/artifactory.sh stop 	--to stop instance
+Credential: 
+   USER: admin
+    PW: password
+
+To change port 
+/usr/local/Cellar/nexus/2.14.3-02/libexec/conf/nexus.properties
+
+http://localhost:8081/artifactory
+
+git@github.pie.apple.com:vinay-gupta2/hello-maven.git
+https://github.com/ananthakumaran/maven-demo.git
+
+https://www.jfrog.com/confluence/display/RTF/Using+File+Specs
+artifactory pattern search
+artifactory query language
+
+{
+  "files": [
+    {
+      "aql": {
+        "items.find": {
+          "name": {
+            "$match": " hello-onboarding-1.3-20171009.124748-1.jar"
+          }
+        }
+      }
+    }
+  ]
+}
+
+"pattern": "lib-release-local_2/com/apple/store/hello-onboarding/1.3-SNAPSHOT/hello-onboarding-1.3-20171009.124748-1.jar”
+ "pattern": "lib-release-local_2/*/hello-onboarding-1.3-20171009.124748-1.*"
+
+flat:true: dont follow the files hierarchy (by default)
+
+
+
+jfrog rt c artd
+jfrog rt c artl
+ jfrog rt c show
+  jfrog rt use artl
+  jfrog rt use artd
+
+jfrog rt del --spec=aql.json --dry-run
+jfrog rt dl --spec=aql.json --dry-run
+jfrog rt cp --spec=aql2.json --dry-run
+jfrog rt mv --spec=aql3.json --dry-run
