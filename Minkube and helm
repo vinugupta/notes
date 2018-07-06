@@ -1,0 +1,154 @@
+Minkube and helm 
+
+ brew install Kubernetes-helm
+
+
+
+minikube start 
+kubectl get pods
+
+brew cask install minikube
+minikube start
+kubernetes dashboard
+
+helem init.  ----  to install tiller into the cluster
+kubectl get pods --namespace kube-system and see Tiller running
+
+kubectl delete pods ubuntu
+
+kubectl config view
+
+kubectl expose deployments triangular-walrus-clair --type=NodePort --port 6061
+kubectl run nginx —image=nginx
+
+minikube ip
+minikube dashboard
+10382  kubectl get services
+10385  minikube status
+kubectl proxy.   for apis
+kubectl describe service wobbling-tiger-clair
+kubectl exec -ti wobbling-tiger-clair-66d4cc87f4-n7dm2 sh
+kubectl get pods
+
+
+
+pods: can contain multiple container but of different kind
+ helm repo update              # Make sure we get the latest list of charts
+$ helm install stable/mysql
+10644  helm repo list
+10645  helm remove helm-artd
+10646  helm repo  remove helm-artd
+10647  helm repo add helm https://artd-iag.apple.com/artifactory/helm
+10648  helm install helm/jenkins
+
+https://prow.k8s.io/command-help?repo=kubernetes%2Fcharts
+https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/
+Helm has two parts: a client (helm) and a server (tiller)
+Tiller runs inside of your Kubernetes cluster, and manages releases (installations) of your charts.
+Helm runs on your laptop, CI/CD, or wherever you want it to run.
+Charts are Helm packages that contain at least two things:
+A description of the package (Chart.yaml)
+One or more templates, which contain Kubernetes manifest files
+
+helm init —upgrade
+
+
+The Master is responsible for managing the cluster
+A node is a VM or a physical computer that serves as a worker machine in a Kubernetes cluster.
+Each node has a Kubelet, which is an agent for managing the node and communicating with the Kubernetes master.
+The nodes communicate with the master using the Kubernetes API
+Kubectl uses the Kubernetes API to interact with the cluster. 
+Kubernetes created a Pod to host your application instance. A Pod is a Kubernetes abstraction that represents a group of one or more application containers (such as Docker or rkt)
+
+minikube start
+kubectl version
+kubectl get nodes
+
+kubectl get - list resources
+kubectl describe - show detailed information about a resource
+kubectl logs - print the logs from a container in a pod
+kubectl exec - execute a command on a container in a pod
+————
+Creating and exploring an nginx deployment
+
+kubectl apply -f https://k8s.io/docs/tasks/run-application/deployment.yaml
+kubectl describe deployment nginx-deployment
+kubectl get pods -l app=nginx
+kubectl describe pod <pod-name>
+
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+yum install -y kubectl
+minikube service invisible-sabertooth-clair —url
+
+kubectl run hi --image=hello-minikube. to deploy applcationin cluset 
+kuctk get pods
+kubeclt get nodes
+kubectl cluster-info
+
+
+
+kubeadm: the command to bootstrap the cluster.
+
+kubelet: the component that runs on all of the machines in your cluster and does things like starting pods and containers.
+
+kubectl: the command line util to talk to your cluster.
+
+
+
+
+kubectl run nginx —image=nginx
+kubectl get pods —all-namespaces
+kubectl get pods -o wide.   —with ip and node
+
+kubectl describe pods
+
+
+
+
+kubectl create -f pod-predefination.yml
+pod-predefination.yml: 
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx    
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres
+  labels:
+    tier: db-tier
+spec:
+  containers:
+    - name: postgres
+      image: postgres
+      env:
+       - name: POSTGRES_PASSWORD
+         value: mysecretpassword
+
+
+kubectl run webserver --image=nginx:alpine
+ minikube dashboard
+
+kubectl expose deployments webserver —type=LoadBalancer —port=80
+kubectl describe service webserver
+
+ minikube service webserver —url
+
+kubectl -n kube-system get po 
